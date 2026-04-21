@@ -2,6 +2,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import ComponentsLesson from "./pages/fundamentals/ComponentsLesson";
 import { Navigation } from "./components/default";
+import InteractivityLesson from "./pages/fundamentals/InteractivityLesson";
+
+
 
 function App() {
 	return (
@@ -21,6 +24,9 @@ function App() {
 							path="/fundamentals/components"
 							element={<ComponentsLesson />}
 						/>
+						<Route 
+						path="/fundamentals/interactivity" 
+						element={<InteractivityLesson />} />;
 					</Routes>
 				</div>
 			</div>
