@@ -10,4 +10,10 @@ export const lessons = [
 		path: "/fundamentals/interactivity",
 		category: "React Fundamentals",
 	},
+	{
+		id: 3,
+		title: "Dynamic Lists & Communication", // Add this new lesson
+		path: "/fundamentals/lists",
+		category: "React Fundamentals",
+	},
 ];

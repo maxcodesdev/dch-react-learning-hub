@@ -3,6 +3,8 @@ import Dashboard from "./pages/Dashboard";
 import ComponentsLesson from "./pages/fundamentals/ComponentsLesson";
 import { Navigation } from "./components/default";
 import InteractivityLesson from "./pages/fundamentals/InteractivityLesson";
+import ListsLesson from "./pages/fundamentals/ListsLesson";
+
 
 
 
@@ -26,7 +28,11 @@ function App() {
 						/>
 						<Route 
 						path="/fundamentals/interactivity" 
-						element={<InteractivityLesson />} />;
+						element={<InteractivityLesson />} />
+
+						<Route path="/fundamentals/lists" 
+						element={<ListsLesson />} />
+						
 					</Routes>
 				</div>
 			</div>
