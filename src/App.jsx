@@ -4,6 +4,7 @@ import ComponentsLesson from "./pages/fundamentals/ComponentsLesson";
 import { Navigation } from "./components/default";
 import InteractivityLesson from "./pages/fundamentals/InteractivityLesson";
 import ListsLesson from "./pages/fundamentals/ListsLesson";
+import TabSystem from "./components/practice/TabSystem";
 
 
 
@@ -32,6 +33,10 @@ function App() {
 
 						<Route path="/fundamentals/lists" 
 						element={<ListsLesson />} />
+
+                         <Route path="/components/practice/tabsystem" 
+						 element={<TabSystem />} />
+						
 						
 					</Routes>
 				</div>

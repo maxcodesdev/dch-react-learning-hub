@@ -209,11 +209,14 @@ function ListsLesson() {
 						<ul style={{ listStyle: "none", padding: 0 }}>
 							{filteredTodos.map((todo) => (
 								<TodoItem
-									key={todo.id}
-									todo={todo}
-									onToggleTodo={handleToggleTodo}
-									onRemoveTodo={handleRemoveTodo}
-								/>
+	key={todo.id}
+	todo={todo}
+	onToggleTodo={handleToggleTodo}
+	onRemoveTodo={handleRemoveTodo}
+	onEditTodo={handleEditTodo}
+	onSaveTodo={handleSaveTodo}
+/>
+								 
 							))}
 						</ul>
 					)}

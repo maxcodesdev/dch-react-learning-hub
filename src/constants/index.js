@@ -16,4 +16,10 @@ export const lessons = [
 		path: "/fundamentals/lists",
 		category: "React Fundamentals",
 	},
+		{
+		id: 4,
+		title: "Practice", // Add this new lesson
+		path: "/components/practice/tabsystem",
+		category: "Practice",
+	},
 ];
