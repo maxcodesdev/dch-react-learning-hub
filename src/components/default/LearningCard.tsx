@@ -1,7 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export function LearningCard({ lesson }) {
+interface LessonType {
+	id: number;
+	title: string;
+	path: string;
+	category: string;
+}
+
+interface LearningCardProps {
+	lesson: LessonType;
+}
+
+
+
+export function LearningCard({ lesson }: LearningCardProps) {
 	return (
 		<Link
 			to={lesson.path}

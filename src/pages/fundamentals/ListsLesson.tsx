@@ -5,9 +5,19 @@ import TodoFilters from "../../components/default/todo/TodoFilters";
 import TodoInput from "../../components/default/todo/TodoInput";
 import TodoSummary from "../../components/default/todo/TodoSummary";
 
+interface Todo {
+  id: number;
+  text: string;
+  completed: boolean;
+  priority: string;
+  dueDate: string;
+  editing: boolean;
+}
+
+
 function ListsLesson() {
 	// State for todos, new todo input, and filter
-	const [todos, setTodos] = useState([
+	const [todos, setTodos] = useState<Todo[]>([
 		{
 			id: 1,
 			text: "Learn React basics",
@@ -34,12 +44,12 @@ function ListsLesson() {
 		},
 	]);
 
-	const [newTodo, setNewTodo] = useState("");
-	const [filter, setFilter] = useState("all");
+	const [newTodo, setNewTodo] = useState<string>("");
+	const [filter, setFilter] = useState<'all' | 'active' | 'completed'>("all");
 	const [searchTerm, setSearchTerm] = useState("");
 	const [selectedTodos, setSelectedTodos] = useState([]);
 	const [sharedCounter, setSharedCounter] = useState(0);
-	const [selectedUser, setSelectedUser] = useState(null);
+	const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
 	const [users] = useState([
 		{
@@ -56,7 +66,7 @@ function ListsLesson() {
 		return todos.length > 0 ? Math.max(...todos.map((todo) => todo.id)) + 1 : 1;
 	};
 
-	const handleAddTodo = () => {
+	const handleAddTodo = ():void => {
 		if (newTodo.trim() !== "") {
 			const todoToAdd = {
 				id: getNewId(),
@@ -71,7 +81,7 @@ function ListsLesson() {
 		}
 	};
 
-	const handleToggleTodo = (id) => {
+	const handleToggleTodo = (id:number) => {
 		setTodos(
 			todos.map((todo) =>
 				todo.id === id ? { ...todo, completed: !todo.completed } : todo
@@ -79,11 +89,11 @@ function ListsLesson() {
 		);
 	};
 
-	const handleRemoveTodo = (id) => {
+	const handleRemoveTodo = (id:number)  => {
 		setTodos(todos.filter((todo) => todo.id !== id));
 	};
 
-	const handleEditTodo = (id) => {
+	const handleEditTodo = (id:number) => {
 		setTodos(
 			todos.map((todo) =>
 				todo.id === id
@@ -93,7 +103,7 @@ function ListsLesson() {
 		);
 	};
 
-	const handleSaveTodo = (id, newText) => {
+	const handleSaveTodo = (id:number, newText:string) => {
 		setTodos(
 			todos.map((todo) =>
 				todo.id === id ? { ...todo, text: newText, editing: false } : todo
@@ -305,7 +315,11 @@ function ListsLesson() {
 	);
 }
 
-function CounterDisplay({ count }) {
+type CounterDisplayProps = {
+	count: number;
+}
+
+function CounterDisplay({ count }:CounterDisplayProps) {
 	return (
 		<div style={{ textAlign: "center", marginBottom: "10px" }}>
 			<h4 style={{ color: "#2c3e50", fontSize: "24px", margin: 0 }}>
@@ -315,7 +329,13 @@ function CounterDisplay({ count }) {
 	);
 }
 
-function CounterButton({ onClick, label, color }) {
+type CounterButtonProps = {
+	onClick: () => void;
+	label:string;
+	color:string;
+}
+
+function CounterButton({ onClick, label, color }:CounterButtonProps) {
 	return (
 		<button
 			onClick={onClick}
@@ -334,7 +354,20 @@ function CounterButton({ onClick, label, color }) {
 	);
 }
 
-function UserList({ users, onUserSelect, selectedUser }) {
+interface User {
+	id: number;
+	name: string;
+	email: string;
+	role: string;
+}
+
+interface UserListProps {
+	users: User[];
+	onUserSelect: (user: User) => void;
+	selectedUser: User | null;
+}
+
+function UserList({ users, onUserSelect, selectedUser }:UserListProps) {
 	return (
 		<div style={{ marginBottom: "20px" }}>
 			<h4 style={{ color: "#2c3e50", marginBottom: "10px" }}>Select a User:</h4>
@@ -361,7 +394,11 @@ function UserList({ users, onUserSelect, selectedUser }) {
 	);
 }
 
-function UserDetails({ user }) {
+interface UserDetailsProps {
+	user: User | null;
+}
+
+function UserDetails({ user }:UserDetailsProps) {
 	if (!user) {
 		return (
 			<div

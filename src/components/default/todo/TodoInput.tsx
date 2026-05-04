@@ -1,4 +1,10 @@
-function TodoInput({ newTodo, setNewTodo, handleAddTodo }) {
+interface TodoInputProps {
+	newTodo: string;
+	setNewTodo: (value: string) => void;
+	handleAddTodo: () => void;
+}
+
+function TodoInput({ newTodo, setNewTodo, handleAddTodo }:TodoInputProps) {
 	return (
 		<div style={{ marginBottom: "25px" }}>
 			<div style={{ display: "flex", gap: "10px", alignItems: "center" }}>

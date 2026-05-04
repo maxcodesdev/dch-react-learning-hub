@@ -1,6 +1,19 @@
 import { LearningCard } from "./LearningCard";
 
-export function LessonsGrid({ lessons }) {
+interface LessonType {
+	id: number;
+	title: string;
+	path: string;
+	category: string;
+}
+
+interface LessonsGridProps {
+	lessons: LessonType[];
+}
+
+
+
+export function LessonsGrid({ lessons }: LessonsGridProps) {
 	return (
 		<div
 			style={{

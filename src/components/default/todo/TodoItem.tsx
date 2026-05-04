@@ -2,13 +2,30 @@
 
 import { useState } from "react";
 
+interface Todo {
+	id: number;
+	text: string;
+	completed: boolean;
+	priority: string;
+	dueDate: string;
+	editing: boolean;
+}
+
+interface TodoItemProps {
+  todo: Todo;
+  onToggleTodo: (id: number) => void;
+  onRemoveTodo: (id: number) => void;
+  onEditTodo: (id: number) => void;
+  onSaveTodo: (id: number, text: string) => void;
+}
+
 function TodoItem({
 	todo,
 	onToggleTodo,
 	onRemoveTodo,
 	onEditTodo,
 	onSaveTodo,
-}) {
+}:TodoItemProps) {
 	const [editText, setEditText] = useState(todo.text);
 
 	return (

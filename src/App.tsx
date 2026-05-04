@@ -5,7 +5,7 @@ import { Navigation } from "./components/default";
 import InteractivityLesson from "./pages/fundamentals/InteractivityLesson";
 import ListsLesson from "./pages/fundamentals/ListsLesson";
 import TabSystem from "./components/practice/TabSystem";
-
+import TypeScriptLesson from './pages/fundamentals/TypeScriptLesson';
 
 
 
@@ -37,6 +37,8 @@ function App() {
                          <Route path="/components/practice/tabsystem" 
 						 element={<TabSystem />} />
 						
+						<Route path="/fundamentals/typescript" 
+						element={<TypeScriptLesson />} />
 						
 					</Routes>
 				</div>

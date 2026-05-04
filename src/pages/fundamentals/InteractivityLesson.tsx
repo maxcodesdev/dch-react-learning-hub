@@ -1,17 +1,27 @@
 // src/pages/fundamentals/InteractivityLesson.jsx
 import { useState } from "react";
 
+interface CounterState {
+  value: number;
+  stepSize: number;
+  history: string[];
+}
+
+
+
 export default function InteractivityLesson() {
 const [count, setCount] = useState(0);
 const [message, setMessage] = useState("No button clicked yet");
 const [inputValue, setInputValue] = useState("");
-const [showDetails, setShowDetails] = useState(false);
-const [newHobby, setNewHobby] = useState("");
-const [hobbies, setHobbies] = useState(["reading", "gaming", "cooking"]);
+const [showDetails, setShowDetails] = useState<boolean>(false);
+const [newHobby, setNewHobby] = useState<string>("");
+const [hobbies, setHobbies] = useState<string[]>(["reading", "gaming", "cooking"]);
 // New state for the advanced counter
-	const [counterValue, setCounterValue] = useState(0);
-	const [stepSize, setStepSize] = useState(1);
-	const [history, setHistory] = useState([]);
+const [counter, setCounter] = useState<CounterState>({
+  value: 0,
+  stepSize: 1,
+  history: []
+});
 
 const handleAddHobby = () => {
 		if (newHobby.trim() !== "") {
@@ -21,24 +31,37 @@ const handleAddHobby = () => {
 		}
 	};
 
-  const handleIncrement = () => {
-	const newValue = counterValue + stepSize;
-	setCounterValue(newValue);
-	setHistory([...history, `+${stepSize} (now ${newValue})`].slice(-5)); // Keep only last 5
+  const handleIncrement = ():void => {
+	const newValue = counter.value + counter.stepSize;
+	setCounter({
+ ...counter,
+    value: newValue,
+    history: [...counter.history, `+${counter.stepSize} (now ${newValue})`].slice(-5)
+  });
+
+	}
+
+const handleDecrement = ():void  => {
+	const newValue = counter.value - counter.stepSize;
+	setCounter({
+		...counter,
+	value: newValue,
+	history: [...counter.history,
+		`-${counter.stepSize} (now ${newValue})`
+	].slice(-5)
+	});
 };
 
-const handleDecrement = () => {
-	const newValue = counterValue - stepSize;
-	setCounterValue(newValue);
-	setHistory([...history, `-${stepSize} (now ${newValue})`].slice(-5));
+const handleReset = ():void => {
+	setCounter({
+		...counter,
+		value:0,
+	history: [...counter.history, "Reset to 0"]
+	.slice(-5)
+});
 };
 
-const handleReset = () => {
-	setCounterValue(0);
-	setHistory([...history, "Reset to 0"].slice(-5));
-};
-
-const buttonStyle = (bgColor) => ({
+const buttonStyle = (bgColor:string) => ({
 	backgroundColor: bgColor,
 	color: "white",
 	border: "none",
@@ -277,10 +300,10 @@ const buttonStyle = (bgColor) => ({
 			fontWeight: "bold",
 			textAlign: "center",
 			margin: "20px 0",
-			color: counterValue >= 0 ? "#2ecc71" : "#e74c3c",
+			color: counter.value >= 0 ? "#2ecc71" : "#e74c3c",
 		}}
 	>
-		{counterValue}
+		{counter.value}
 	</div>
 
 	{/* Step Size Input */}
@@ -288,8 +311,10 @@ const buttonStyle = (bgColor) => ({
 		<label style={{ marginRight: "10px" }}>Step size:</label>
 		<input
 			type="number"
-			value={stepSize}
-			onChange={(e) => setStepSize(Number(e.target.value))}
+			value={counter.stepSize}
+			onChange={(e) => setCounter({
+				...counter,
+				stepSize:Number(e.target.value)})}
 			style={{
 				padding: "5px",
 				width: "80px",
@@ -303,7 +328,7 @@ const buttonStyle = (bgColor) => ({
 	{/* Buttons */}
 	<div style={{ textAlign: "center", marginBottom: "20px" }}>
 		<button onClick={handleDecrement} style={buttonStyle("#e74c3c")}>
-			-{stepSize}
+			-{counter.stepSize}
 		</button>
 		<button
 			onClick={handleReset}
@@ -312,7 +337,7 @@ const buttonStyle = (bgColor) => ({
 			Reset
 		</button>
 		<button onClick={handleIncrement} style={buttonStyle("#2ecc71")}>
-			+{stepSize}
+			+{counter.stepSize}
 		</button>
 	</div>
 
@@ -323,7 +348,7 @@ const buttonStyle = (bgColor) => ({
 			<p style={{ color: "#7f8c8d", fontStyle: "italic" }}>No actions yet</p>
 		) : (
 			<ul style={{ listStyle: "none", padding: 0 }}>
-				{history.map((action, index) => (
+				{counter.history.map((action, index) => (
 					<li
 						key={index}
 						style={{

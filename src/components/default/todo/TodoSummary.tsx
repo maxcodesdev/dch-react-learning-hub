@@ -1,4 +1,17 @@
-function TodoSummary({ todos }) {
+interface Todo {
+	id: number;
+	text: string;
+	completed: boolean;
+	priority: string;
+	dueDate: string;
+	editing: boolean;
+}
+
+interface TodoSummaryProps {
+	todos: Todo[];
+}
+
+function TodoSummary({ todos }:TodoSummaryProps) {
 	return (
 		<div
 			style={{

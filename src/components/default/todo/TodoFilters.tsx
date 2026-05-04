@@ -1,7 +1,16 @@
-function TodoFilters({ filter, setFilter }) {
+type FilterType = "all" | "active" | "completed";
+
+interface TodoFiltersProps {
+	filter: FilterType;
+	setFilter: (filter: FilterType) => void;
+}
+
+function TodoFilters({ filter, setFilter }:TodoFiltersProps) {
 	return (
 		<div style={{ marginBottom: "25px", display: "flex", gap: "10px" }}>
-			{["all", "active", "completed"].map((filterType) => (
+			{( 
+			["all", "active", "completed"] as FilterType[])
+			.map((filterType) => (
 				<button
 					key={filterType}
 					onClick={() => setFilter(filterType)}

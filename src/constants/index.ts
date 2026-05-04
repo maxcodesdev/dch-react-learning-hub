@@ -1,8 +1,17 @@
-export const lessons = [
+export interface LessonType {
+  id: number;
+  title: string;
+  path: string;
+  category: string;
+}
+
+
+export const lessons: LessonType[] = [
 	{
 		id: 1,
 		title: "React Components & JSX",
 		path: "/fundamentals/components",
+		category: "React Fundamentals",
 	},
 	{
 		id: 2,
@@ -22,4 +31,10 @@ export const lessons = [
 		path: "/components/practice/tabsystem",
 		category: "Practice",
 	},
+	 {
+    id: 5,
+    title: "TypeScript Integration",  // Add this new lesson
+    path: "/fundamentals/typescript",
+    category: "React Fundamentals",
+  },
 ];
